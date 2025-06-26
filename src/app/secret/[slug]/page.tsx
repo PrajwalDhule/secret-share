@@ -7,13 +7,7 @@ import { redirect, useParams } from "next/navigation";
 
 export default function SecretPage() {
   const { slug } = useParams<{ slug: string }>();
-  if(!slug) {
-    return <Message message="Invalid url" />;
-  }
   const { data: session, status: sessionStatus } = useSession();
-  if (sessionStatus !== "loading" && !session?.user) {
-    redirect("/auth/sign-in");
-  }
 
   const {
     isLoading,
@@ -29,6 +23,10 @@ export default function SecretPage() {
   if (status === "not_found") return <Message message="Secret not found" />;
   if (status === "viewed & consumed") return <Message message="Viewed already!" />;
   if (status === "expired") return <Message message="This secret has expired." />;
+
+  if (sessionStatus !== "loading" && !session?.user) {
+    redirect("/auth/sign-in");
+  }
 
   if (decrypted) {
     return (
