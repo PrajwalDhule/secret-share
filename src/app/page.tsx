@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
 import { importKey, decryptAES } from "@/utils/crypto";
 import Link from "next/link";
+import Loader from "@/components/Loader";
 
 type SecretEntry = {
   id: string;
@@ -135,7 +136,7 @@ export default function Home() {
     );
   }
 
-  if (status === "loading" || isLoading) return <p>Loading...</p>;
+  if (status === "loading" || isLoading) return <Loader />;
 
   return (
     <div className="max-w-3xl mx-auto p-6">

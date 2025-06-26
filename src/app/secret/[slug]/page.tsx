@@ -1,5 +1,6 @@
 "use client"
 
+import Loader from "@/components/Loader";
 import Message from "@/components/Message";
 import { useSecret } from "@/hooks/useSecret";
 import { useSession } from "next-auth/react";
@@ -19,7 +20,7 @@ export default function SecretPage() {
     error,
   } = useSecret(slug);
 
-  if (isLoading) return <Message message="Loading secret..." />;
+  if (isLoading) return <Loader />;
   if (status === "not_found") return <Message message="Secret not found" />;
   if (status === "viewed & consumed") return <Message message="Viewed already!" />;
   if (status === "expired") return <Message message="This secret has expired." />;

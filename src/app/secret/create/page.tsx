@@ -7,6 +7,7 @@ import { redirect } from "next/navigation"
 import { useCreateEncryptedSecret } from "@/hooks/useCreateSecret"
 import { useState } from "react"
 import { Copy, Eye, EyeOff, Lock, Clock, Shield, Key } from "lucide-react"
+import Loader from "@/components/Loader"
 
 export default function CreateSecretPage() {
   const { data: session, status } = useSession()
@@ -66,16 +67,7 @@ export default function CreateSecretPage() {
     return `${seconds} seconds`
   }
 
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-slate-600 font-medium">Loading...</span>
-        </div>
-      </div>
-    )
-  }
+  if (status === "loading") return <Loader />
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
