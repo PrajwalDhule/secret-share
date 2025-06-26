@@ -79,6 +79,7 @@ export function useSecret(slug: string) {
     decrypt,
     setPassword,
     password,
+    hasPassword: data?.secret?.hasPassword || false,
     error,
   };
 }
